@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 /**
+ * Tests using Selenium WebDriver
+ *
  * Created by laszlogaal on 2017. 05. 15..
  */
 
@@ -79,7 +81,7 @@ public class HomeworkTest {
         System.out.println(routePage.getTravelTime());
     }
 
-    @Test(description = "homework 3 - Actions")
+    @Test(description = "homework 3 - Actions and Screenshot")
     public void homework_3() throws IOException {
 
         //Test data
@@ -104,7 +106,7 @@ public class HomeworkTest {
     }
 
 
-    boolean isElementPresent(By locator) {
+    private boolean isElementPresent(By locator) {
         return !driver.findElements(locator).isEmpty();
     }
 }
