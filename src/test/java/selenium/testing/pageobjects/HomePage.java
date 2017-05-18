@@ -1,3 +1,5 @@
+package selenium.testing.pageobjects;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -5,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
+ * Home page for BKK UTVONAL
+ *
  * Created by laszlogaal on 2017. 05. 16..
  */
 public class HomePage extends AbstractPage {

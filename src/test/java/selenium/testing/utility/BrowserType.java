@@ -1,4 +1,8 @@
+package selenium.testing.utility;
+
 /**
+ * Supported web browsers
+ *
  * Created by laszlogaal on 2017. 05. 15..
  */
 

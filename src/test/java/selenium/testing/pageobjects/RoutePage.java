@@ -1,12 +1,16 @@
+package selenium.testing.pageobjects;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 /**
+ * Route page for BKK UTVONAL
+ *
  * Created by laszlogaal on 2017. 05. 16..
  */
 public class RoutePage extends AbstractPage {
-    public RoutePage(WebDriver driver){
+    RoutePage(WebDriver driver){
         super(driver);
         PageFactory.initElements(this.driver, this);
     }

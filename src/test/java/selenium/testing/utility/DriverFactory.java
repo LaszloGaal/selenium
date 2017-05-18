@@ -1,9 +1,13 @@
+package selenium.testing.utility;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 /**
+ * WebDriver factory
+ *
  * Created by laszlogaal on 2017. 05. 17..
  */
 public class DriverFactory {
