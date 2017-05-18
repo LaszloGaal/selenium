@@ -33,4 +33,14 @@ public class HomePage extends AbstractPage {
         wait.until(ExpectedConditions.titleIs(routePageTitle));
         return new RoutePage(driver);
     }
+
+    public RoutePage planTripWithActions(String from, String to){
+        typeText(fromLocator, from);
+        typeText(toLocator, to);
+        clickButton(planLocator);
+        //Wait for the page to fuly load
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.titleIs(routePageTitle));
+        return new RoutePage(driver);
+    }
 }
