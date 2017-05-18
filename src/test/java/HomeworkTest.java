@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 
 public class HomeworkTest {
-    private final BrowserType BROWSER = BrowserType.SAFARI;
+    private final BrowserType BROWSER = BrowserType.CHROME;
     private final DriverFactory driverFactory = new DriverFactory();
     private WebDriver driver;
 
