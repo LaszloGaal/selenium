@@ -25,7 +25,7 @@ public class HomePage extends AbstractPage {
 
     public void openHomePage(){
         getDriver().get(URL);
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(fromLocator));
     }
     public RoutePage planTrip(String from, String to){
@@ -33,7 +33,7 @@ public class HomePage extends AbstractPage {
         findElement(toLocator).sendKeys(to);
         findElement(planLocator).click();
         //Wait for the page to fuly load
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.titleIs(routePageTitle));
         return new RoutePage(driver);
     }
@@ -43,7 +43,7 @@ public class HomePage extends AbstractPage {
         typeText(toLocator, to);
         clickButton(planLocator);
         //Wait for the page to fuly load
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.titleIs(routePageTitle));
         return new RoutePage(driver);
     }

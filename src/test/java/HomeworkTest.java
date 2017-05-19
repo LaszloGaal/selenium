@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import selenium.testing.pageobjects.HomePage;
 import selenium.testing.pageobjects.RoutePage;
+import selenium.testing.steps.TestSteps;
 import selenium.testing.utility.BrowserType;
 import selenium.testing.utility.DriverFactory;
 
@@ -22,11 +23,14 @@ public class HomeworkTest {
     private final BrowserType BROWSER = BrowserType.CHROME;
     private final DriverFactory driverFactory = new DriverFactory();
     private WebDriver driver;
+    private String screenshotDir = "/Users/laszlogaal/Desktop/screenshot.png";
+    private TestSteps testSteps;
 
 
     @BeforeClass(description = "Start browser")
     public void startBrowser() {
         driver = driverFactory.getDriver(BROWSER);
+        testSteps = new TestSteps(driver, screenshotDir);
     }
 
 
@@ -79,7 +83,7 @@ public class HomeworkTest {
         RoutePage routePage = homePage.planTrip(from, to);
 
         //Verify the result
-        Assert.assertTrue(routePage.isElementPresent(By.className("jarat-utvonal")), "Direction not found");
+        Assert.assertTrue(routePage.isElementPresent(By.className("jarat-utvonal")), "Direction not found:");
         Assert.assertFalse(routePage.getTravelTime().equals(""));
         System.out.print("homework_2 - ");
         System.out.println(routePage.getTravelTime());
@@ -91,7 +95,7 @@ public class HomeworkTest {
         //Test data
         final String    from        = "Vaskapu utca 3";
         final String    to          = "Futo utca 47";
-        String screenshotDir = "/Users/laszlogaal/Desktop/screenshot.png";
+        String screenshotDir = "/Users/laszlogaal/Desktop/screenshot-3.png";
 
         //Test steps
         HomePage homePage = new HomePage(driver);
@@ -107,6 +111,21 @@ public class HomeworkTest {
         //Highlight travel time
         routePage.highlightElement(By.className("jarat-utvonal"));
         routePage.createScreenshot(screenshotDir);
+    }
+
+    @Test(description = "homework 4 - Layers")
+    public void homework_4() throws IOException {
+
+        //Test data
+        final String    from        = "Vaskapu utca 3";
+        final String    to          = "Futo utca 47";
+
+        //Test steps
+        testSteps.openBrowser();
+        testSteps.planTrip(from, to);
+        testSteps.verifyResultPage();
+        testSteps.saveRouteDetailsAndPrintDuration();
+        testSteps.closeBrowser();
     }
 
 

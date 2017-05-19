@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
  * Created by laszlogaal on 2017. 05. 16..
  */
 public class RoutePage extends AbstractPage {
-    RoutePage(WebDriver driver){
+    public RoutePage(WebDriver driver){
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
