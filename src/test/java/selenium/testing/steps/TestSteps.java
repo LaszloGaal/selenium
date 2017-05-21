@@ -38,16 +38,13 @@ public class TestSteps {
 
     public void verifyResultPage() {
         Assert.assertTrue(routePage.hasRoute(), "Direction not found");
-        Assert.assertFalse(routePage.getTravelTime().equals(""));
     }
 
-    public void saveRouteDetailsAndPrintDuration() throws IOException {
-        routePage.highlightElement(By.className("jarat-utvonal"));
-        routePage.createScreenshot(screenshotDir);
-        System.out.println(routePage.getTravelTime());
+    public void printRouteOptions() throws IOException {
+        routePage.printTravelTimes();
     }
 
-    public void createScreenshotOnFailure() throws IOException {
+    public void createScreenshot() throws IOException {
         routePage.createScreenshot(screenshotDir + "FAILURE_");
     }
 }

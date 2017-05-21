@@ -2,6 +2,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestClass;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -37,13 +39,14 @@ public class HomeworkTest {
 
     @AfterClass(description = "Stop Browser")
     public void stopBrowser() {
+
         driver.quit();
     }
 
     @AfterMethod
     public void createScreenshotOnFailure(ITestResult result) throws IOException {
         if(result.getStatus() == ITestResult.FAILURE){
-            testSteps.createScreenshotOnFailure();
+            testSteps.createScreenshot();
         }
     }
 
@@ -74,7 +77,6 @@ public class HomeworkTest {
         //Wait for the page to fuly load
         wait.until(ExpectedConditions.titleIs("Útvonalterv - BKK FUTÁR Utazástervező"));
         //Print travel time
-        System.out.print("homework_1 - ");
         System.out.println(driver.findElement(utvonal).getText());
     }
 
@@ -92,9 +94,8 @@ public class HomeworkTest {
 
         //Verify the result
         Assert.assertTrue(routePage.isElementPresent(By.className("jarat-utvonal")), "Direction not found:");
-        Assert.assertFalse(routePage.getTravelTime().equals(""));
-        System.out.print("homework_2 - ");
-        System.out.println(routePage.getTravelTime());
+
+        routePage.printTravelTimes();
     }
 
     @Test(description = "homework 3 - Actions and Screenshot")
@@ -112,9 +113,8 @@ public class HomeworkTest {
 
         //Verify the result
         Assert.assertTrue(routePage.isElementPresent(By.className("jarat-utvonal")), "Direction not found");
-        Assert.assertFalse(routePage.getTravelTime().equals(""));
-        System.out.print("homework_3 - ");
-        System.out.println(routePage.getTravelTime());
+
+        routePage.printTravelTimes();
 
         //Highlight travel time
         routePage.highlightElement(By.className("jarat-utvonal"));
@@ -132,7 +132,7 @@ public class HomeworkTest {
         testSteps.openBrowser();
         testSteps.planTrip(from, to);
         testSteps.verifyResultPage();
-        testSteps.saveRouteDetailsAndPrintDuration();
+        testSteps.printRouteOptions();
     }
 
     @Test(description = "homework 5 - screenshot on failure")
@@ -146,6 +146,20 @@ public class HomeworkTest {
         testSteps.openBrowser();
         testSteps.planTrip(from, to);
         testSteps.verifyResultPage();
+    }
+
+    @Test(description = "homework 6 - multiple routes")
+    public void homework_6() throws IOException {
+
+        //Test data
+        final String    from        = "Vaskapu utca 3";
+        final String    to          = "Liszt Ferenc Airport";
+
+        //Test steps
+        testSteps.openBrowser();
+        testSteps.planTrip(from, to);
+        testSteps.verifyResultPage();
+        testSteps.printRouteOptions();
     }
 
 

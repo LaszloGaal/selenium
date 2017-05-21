@@ -17,6 +17,7 @@ public class HomePage extends AbstractPage {
     private final By toLocator = By.className("planner-to");
     private final By planLocator = By.className("planner-plan");
     private final String routePageTitle = "Útvonalterv - BKK FUTÁR Utazástervező";
+    private final String xpath = "//div[h2/text()='Lehetséges útvonalak']";
 
     public HomePage(WebDriver driver){
         super(driver);
@@ -34,17 +35,17 @@ public class HomePage extends AbstractPage {
         findElement(planLocator).click();
         //Wait for the page to fuly load
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.titleIs(routePageTitle));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("itinerary-0")));
         return new RoutePage(driver);
     }
 
     public RoutePage planTripWithActions(String from, String to){
         typeText(fromLocator, from);
         typeText(toLocator, to);
-        clickButton(planLocator);
-        //Wait for the page to fuly load
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.titleIs(routePageTitle));
+        wait.until(ExpectedConditions.elementToBeClickable(planLocator));
+        clickButton(planLocator);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("itinerary-0")));
         return new RoutePage(driver);
     }
 }
