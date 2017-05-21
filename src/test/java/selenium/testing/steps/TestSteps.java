@@ -3,11 +3,12 @@ package selenium.testing.steps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import selenium.testing.pageobjects.AbstractPage;
 import selenium.testing.pageobjects.HomePage;
 import selenium.testing.pageobjects.RoutePage;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Common steps of test executions
@@ -36,7 +37,7 @@ public class TestSteps {
     }
 
     public void verifyResultPage() {
-        Assert.assertTrue(routePage.isElementPresent(By.className("jarat-utvonal")), "Direction not found");
+        Assert.assertTrue(routePage.hasRoute(), "Direction not found");
         Assert.assertFalse(routePage.getTravelTime().equals(""));
     }
 
@@ -46,7 +47,7 @@ public class TestSteps {
         System.out.println(routePage.getTravelTime());
     }
 
-    public void closeBrowser() {
-        driver.quit();
+    public void createScreenshotOnFailure() throws IOException {
+        routePage.createScreenshot(screenshotDir + "FAILURE_");
     }
 }

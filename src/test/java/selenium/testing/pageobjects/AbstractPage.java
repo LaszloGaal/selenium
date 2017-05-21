@@ -6,6 +6,8 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Parent page for BKK UTVONAL
@@ -49,6 +51,8 @@ public abstract class AbstractPage {
 
     public void createScreenshot (String saveToDirectory) throws IOException {
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(saveToDirectory));
+        FileUtils.copyFile(scrFile,
+                new File(saveToDirectory +
+                        new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".png"));
     }
 }

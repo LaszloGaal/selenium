@@ -2,7 +2,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import selenium.testing.pageobjects.HomePage;
@@ -23,7 +25,7 @@ public class HomeworkTest {
     private final BrowserType BROWSER = BrowserType.CHROME;
     private final DriverFactory driverFactory = new DriverFactory();
     private WebDriver driver;
-    private String screenshotDir = "/Users/laszlogaal/Desktop/screenshot.png";
+    private String screenshotDir = "/Users/laszlogaal/Desktop/";
     private TestSteps testSteps;
 
 
@@ -33,10 +35,16 @@ public class HomeworkTest {
         testSteps = new TestSteps(driver, screenshotDir);
     }
 
-
     @AfterClass(description = "Stop Browser")
     public void stopBrowser() {
         driver.quit();
+    }
+
+    @AfterMethod
+    public void createScreenshotOnFailure(ITestResult result) throws IOException {
+        if(result.getStatus() == ITestResult.FAILURE){
+            testSteps.createScreenshotOnFailure();
+        }
     }
 
 
@@ -95,7 +103,7 @@ public class HomeworkTest {
         //Test data
         final String    from        = "Vaskapu utca 3";
         final String    to          = "Futo utca 47";
-        String screenshotDir = "/Users/laszlogaal/Desktop/screenshot-3.png";
+        String screenshotDir = "/Users/laszlogaal/Desktop/";
 
         //Test steps
         HomePage homePage = new HomePage(driver);
@@ -125,7 +133,19 @@ public class HomeworkTest {
         testSteps.planTrip(from, to);
         testSteps.verifyResultPage();
         testSteps.saveRouteDetailsAndPrintDuration();
-        testSteps.closeBrowser();
+    }
+
+    @Test(description = "homework 5 - screenshot on failure")
+    public void homework_5() throws IOException {
+
+        //Test data
+        final String    from        = "Vaskapu utca 3";
+        final String    to          = "New York";
+
+        //Test steps
+        testSteps.openBrowser();
+        testSteps.planTrip(from, to);
+        testSteps.verifyResultPage();
     }
 
 

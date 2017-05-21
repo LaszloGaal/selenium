@@ -19,4 +19,8 @@ public class RoutePage extends AbstractPage {
         //Print travel time
         return driver.findElement(By.className("jarat-utvonal")).getText();
     }
+
+    public boolean hasRoute(){
+        return isElementPresent(By.className("jarat-utvonal"));
+    }
 }
