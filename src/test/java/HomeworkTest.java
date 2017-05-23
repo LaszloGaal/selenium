@@ -5,10 +5,7 @@ import org.testng.Assert;
 import org.testng.ITestClass;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import selenium.testing.pageobjects.HomePage;
 import selenium.testing.pageobjects.RoutePage;
 import selenium.testing.steps.TestSteps;
@@ -16,6 +13,7 @@ import selenium.testing.utility.BrowserType;
 import selenium.testing.utility.DriverFactory;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 /**
  * Tests using Selenium WebDriver
@@ -29,12 +27,20 @@ public class HomeworkTest {
     private WebDriver driver;
     private String screenshotDir = "/Users/laszlogaal/Desktop/";
     private TestSteps testSteps;
+    private String testName;
 
 
     @BeforeClass(description = "Start browser")
     public void startBrowser() {
         driver = driverFactory.getDriver(BROWSER);
         testSteps = new TestSteps(driver, screenshotDir);
+    }
+
+
+    @BeforeMethod
+    public void saveTestMethodName(Method method)
+    {
+        testName = method.getName();
     }
 
     @AfterClass(description = "Stop Browser")
@@ -46,7 +52,7 @@ public class HomeworkTest {
     @AfterMethod
     public void createScreenshotOnFailure(ITestResult result) throws IOException {
         if(result.getStatus() == ITestResult.FAILURE){
-            testSteps.createScreenshot();
+            testSteps.createScreenshot(testName + "_FAILURE");
         }
     }
 
@@ -118,7 +124,7 @@ public class HomeworkTest {
 
         //Highlight travel time
         routePage.highlightElement(By.className("jarat-utvonal"));
-        routePage.createScreenshot(screenshotDir);
+        routePage.createScreenshot(screenshotDir, testName);
     }
 
     @Test(description = "homework 4 - Layers")

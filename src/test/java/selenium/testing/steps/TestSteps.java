@@ -44,7 +44,7 @@ public class TestSteps {
         routePage.printTravelTimes();
     }
 
-    public void createScreenshot() throws IOException {
-        routePage.createScreenshot(screenshotDir + "FAILURE_");
+    public void createScreenshot(String testName) throws IOException {
+        routePage.createScreenshot(screenshotDir, testName);
     }
 }

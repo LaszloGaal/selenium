@@ -49,10 +49,11 @@ public abstract class AbstractPage {
         }
     }
 
-    public void createScreenshot (String saveToDirectory) throws IOException {
+    public void createScreenshot (String saveToDirectory, String fileNamePrefix) throws IOException {
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        System.out.println(saveToDirectory);
         FileUtils.copyFile(scrFile,
-                new File(saveToDirectory +
+                new File(saveToDirectory + fileNamePrefix + "_" +
                         new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".png"));
     }
 }
