@@ -1,14 +1,15 @@
 package selenium.testing.steps;
 
-import org.openqa.selenium.By;
+import org.hamcrest.Matcher;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import selenium.testing.pageobjects.HomePage;
 import selenium.testing.pageobjects.RoutePage;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  * Common steps of test executions
@@ -37,7 +38,7 @@ public class TestSteps {
     }
 
     public void verifyResultPage() {
-        Assert.assertTrue(routePage.hasRoute(), "Direction not found");
+        assertThat("Direction not found", routePage.hasRoute(), is(true));
     }
 
     public void printRouteOptions() throws IOException {
