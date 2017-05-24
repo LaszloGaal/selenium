@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
 
 /**
  * Common steps of test executions
@@ -38,7 +39,7 @@ public class TestSteps {
     }
 
     public void verifyResultPage() {
-        assertThat("Direction not found", routePage.hasRoute(), is(true));
+        assertThat("Direction not found", routePage.hasRoute(), is(not(false)));
     }
 
     public void printRouteOptions() throws IOException {
